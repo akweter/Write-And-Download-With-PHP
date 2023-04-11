@@ -1,3 +1,35 @@
+<?php
+        if (isset($_POST['create_doc'])) {
+            if (! empty($_POST['topic']) && ! empty($_POST['bodyContent'])) {
+                
+                $head = $_POST['topic'];
+                $body = $_POST['content'];
+
+                $Output =' <h2>james</h2> <p>sad</p>';
+
+                $filename = "BSP-".date("d-m-Y").'.docx';
+
+                header("Cache-Control: ");
+                @header("Pragma: ");
+                header("Expires: 0");
+                header("Content-Type: application/vnd.msword");
+                header("content-disposition: attachment; filename=".$filename);
+
+                echo "<html";
+                echo $Output;
+                echo "</html>";
+
+            }
+            else {
+                $required_fields = '
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <big>All fields are required!</big>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+            }
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +57,9 @@
         <div class="p-5">
             <div class="col-md-3"></div>
             <div class="col-md-6">
+                <?php if(isset($required_fields)){echo($required_fields);} ?>
                 <div class="col-md-12">
-                    <form action="export.php" method="post">
+                    <form action="" method="post">
                         <h4>Title</h4>
                         <input type="text" name="topic" class="form-control"/>
                         <br/>
